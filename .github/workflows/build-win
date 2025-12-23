@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Clear electron-builder cache
+        run: |
+          if exist "%LOCALAPPDATA%\electron-builder\Cache" (
+            rmdir /s /q "%LOCALAPPDATA%\electron-builder\Cache"
+          )
+
       - name: Build Windows installer
         run: npm run dist:win
         env:
